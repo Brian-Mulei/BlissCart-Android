@@ -2,4 +2,28 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Primary Color -->
+    <color name="colorPrimary">#5A2D81</color>
+    <color name="colorPrimaryDark">#4A1A62</color>
+    <color name="colorAccent">#F8C300</color>
+
+    <!-- Background Color -->
+    <color name="colorBackground">#F4F4F4</color>
+
+    <!-- Accent Color -->
+    <color name="colorAccentSecondary">#FF6F61</color>
+
+    <!-- Text Colors -->
+    <color name="textColorPrimary">#333333</color>
+    <color name="textColorSecondary">#666666</color>
+
+    <!-- Status Colors -->
+    <color name="colorSuccess">#28A745</color>
+    <color name="colorError">#DC3545</color>
+    <color name="colorWarning">#FFC107</color>
+
+    <!-- Link Color -->
+    <color name="colorLink">#007BFF</color>
+
 </resources>

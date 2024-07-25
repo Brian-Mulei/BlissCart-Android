@@ -6,6 +6,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mukshi.blisscart.R
 import com.mukshi.blisscart.utils.SharedPref
 
@@ -23,11 +25,38 @@ class HomeActivity : AppCompatActivity() {
             insets
         }
 
-        sharedPrefsHelper = SharedPref(this)
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
-        val tvWelcome: TextView = findViewById(R.id.textView)
-        val username = sharedPrefsHelper.getUsername()
-        tvWelcome.text = "Welcome, $username!"
+        bottomNavigationView.setOnItemSelectedListener { menuItem ->
+            when(menuItem.itemId){
+                R.id.nav_home -> {
 
+                    loadFragment(HomeFragment())
+                    true
+                }
+                R.id.nav_saved -> {
+                    loadFragment(CartFragment())
+                    true
+                }
+
+                else->false
+            }
+
+
+        }
+
+        if(savedInstanceState == null){
+            bottomNavigationView.selectedItemId = R.id.nav_home
+        }
+       // sharedPrefsHelper = SharedPref(this)
+
+     //   val tvWelcome: TextView = findViewById(R.id.textView)
+       // val username = sharedPrefsHelper.getUsername()
+   //     tvWelcome.text = "Welcome, $username!"
+
+    }
+
+    private fun loadFragment(fragment:Fragment){
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,fragment).commit()
     }
 }

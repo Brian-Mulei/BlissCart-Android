@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">BlissCart</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="create_account">Create Account</string>
+    <string name="menu_name_account">Account</string>
+    <string name="menu_name_inbox">Inbox</string>
+    <string name="menu_name_saved">Saved</string>
+    <string name="menu_name_home">Home</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

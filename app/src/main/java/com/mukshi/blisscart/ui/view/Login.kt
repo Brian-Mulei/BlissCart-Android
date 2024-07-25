@@ -37,10 +37,16 @@ class Login : AppCompatActivity() {
 
         sharedPrefsHelper = SharedPref(this)
 
+
+        if (sharedPrefsHelper.isLoggedIn()) {
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
+        }
+
         val etUsername: EditText = findViewById(R.id.etUsername)
         val etPassword: EditText = findViewById(R.id.etPassword)
         val btnLogin: Button = findViewById(R.id.btnLogin)
-        val tvMessage: TextView = findViewById(R.id.tvMessage)
+     //   val tvMessage: TextView = findViewById(R.id.tvMessage)
 
         btnLogin.setOnClickListener {
             val username = etUsername.text.toString().trim()
@@ -50,12 +56,14 @@ class Login : AppCompatActivity() {
 
         loginViewModel.loginResponse.observe(this) { response ->
             response?.let {
-                tvMessage.text = it.message
-                tvMessage.visibility = TextView.VISIBLE
+           //     tvMessage.text = it.message
+             //   tvMessage.visibility = TextView.VISIBLE
                 Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
                 sharedPrefsHelper.saveUsername(etUsername.text.toString().trim())
                 if (it.access_token.isNotEmpty()) {
                     // Navigate to home page
+
+                    sharedPrefsHelper.setLoggedIn()
                     startActivity(Intent(this, HomeActivity::class.java))
                     finish()
                 }
@@ -64,8 +72,8 @@ class Login : AppCompatActivity() {
 
         loginViewModel.error.observe(this) { error ->
             error?.let {
-                tvMessage.text = it
-                tvMessage.visibility = TextView.VISIBLE
+             //   tvMessage.text = it
+               // tvMessage.visibility = TextView.VISIBLE
                 Toast.makeText(this, it, Toast.LENGTH_LONG).show()
 
             }

@@ -3,38 +3,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.Login">
+    tools:context=".ui.view.Login"
+     android:background="@color/colorBackground"
+
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_centerInParent="true"
+
+    android:padding="16dp">
 
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Username"
+        android:layout_centerInParent="true"
+
         android:layout_margin="16dp"/>
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
         android:layout_below="@id/etUsername"
+
+        android:layout_centerInParent="true"
         android:layout_margin="16dp"
-        android:inputType="textPassword"/>
+        android:hint="Password"
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
         android:layout_below="@id/etPassword"
-        android:layout_margin="16dp"/>
+        android:layout_centerInParent="true"
+        android:layout_margin="16dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginBottom="16dp"
+        android:text="Login" />
 
     <TextView
-        android:id="@+id/tvMessage"
-        android:layout_width="match_parent"
+        android:id="@+id/textViewForgotPassword"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnLogin"
-        android:layout_margin="16dp"
-        android:visibility="gone"/>
+        android:layout_marginTop="16dp"
+        android:text="@string/forgot_password"
+        android:textColor="@color/colorLink"
+        android:layout_gravity="center"
+        android:textSize="14sp" />
+
+    <!-- Create Account Button -->
+    <TextView
+        android:id="@+id/textViewCreateAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="@string/create_account"
+        android:textColor="@color/colorLink"
+        android:layout_gravity="center"
+        android:textSize="14sp" />
+</LinearLayout>
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/tvMessage"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/textViewCreateAccount"-->
+<!--        android:layout_margin="16dp"-->
+<!--        -->
+<!--        android:visibility="gone"/>-->
 
 </RelativeLayout>
