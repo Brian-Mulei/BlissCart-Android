@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mukshi.blisscart.R
 import com.mukshi.blisscart.data.model.Product
 import com.squareup.picasso.Picasso
+import java.util.Locale
 
 class ProductAdapter(private val products:List<Product> , private val onClick:(Product)->Unit) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(), Filterable{
@@ -35,9 +36,20 @@ class ProductAdapter(private val products:List<Product> , private val onClick:(P
 
     override fun getItemCount(): Int =filteredProducts.size
 
-    override fun getFilter(): Filter {
-        TODO("Not yet implemented")
-    }
+      fun filter(query:String): List<Product> {
+
+val  lowerCaseQuery = query.lowercase()
+
+          filteredProducts = if(lowerCaseQuery.isEmpty()){
+              products
+          }else{
+              products.filter {
+                  it.product_name.lowercase().contains(lowerCaseQuery) ||
+                          it.description.lowercase().contains(lowerCaseQuery)
+              }
+          }
+           return filteredProducts
+      }
     inner class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val productName: TextView = itemView.findViewById(R.id.product_name)
@@ -61,10 +73,12 @@ class ProductAdapter(private val products:List<Product> , private val onClick:(P
             }
 
 
-
-
         }
 
+    }
+
+    override fun getFilter(): Filter {
+        TODO("Not yet implemented")
     }
 
 

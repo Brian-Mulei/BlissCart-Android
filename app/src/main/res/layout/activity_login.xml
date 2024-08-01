@@ -21,14 +21,21 @@
         android:layout_height="wrap_content"
         android:hint="Username"
         android:layout_centerInParent="true"
+        android:background="@drawable/ic_border"
+
+        android:padding="16dp"
 
         android:layout_margin="16dp"/>
 
     <EditText
         android:id="@+id/etPassword"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/etUsername"
+        android:background="@drawable/ic_border"
+
+        android:padding="16dp"
 
         android:layout_centerInParent="true"
         android:layout_margin="16dp"
@@ -37,12 +44,13 @@
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_below="@id/etPassword"
         android:layout_centerInParent="true"
         android:layout_margin="16dp"
-        android:layout_marginTop="34dp"
+         android:layout_marginTop="34dp"
         android:layout_marginBottom="16dp"
         android:text="Login" />
 

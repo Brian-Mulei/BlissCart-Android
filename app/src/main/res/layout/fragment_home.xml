@@ -3,21 +3,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context=".ui.view.HomeFragment">
 
-     <EditText
-        android:id="@+id/search_bar"
+    <LinearLayout
+        android:id="@+id/search_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="Search Products"
-        android:padding="16dp"/>
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/search_bar"
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="Search Products"
+            android:layout_margin="12dp"
+            android:background="@drawable/ic_border"
+
+            android:padding="16dp"/>
+
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/search_bar"
+            android:layout_marginTop="8dp"
+
+            android:text="Go" />
+
+
+    </LinearLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/product_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
-        android:layout_below="@id/search_bar"
+        android:layout_below="@id/search_bar_layout"
         />
 </RelativeLayout>
