@@ -66,6 +66,9 @@ dependencies {
     kapt("androidx.room:room-compiler:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
 
+    implementation ("androidx.activity:activity-ktx:1.9.1")
+    implementation ("androidx.fragment:fragment-ktx:1.8.2")
+
     implementation ("com.squareup.picasso:picasso:2.71828")
 
     // Retrofit for network calls
