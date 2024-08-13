@@ -12,7 +12,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mukshi.blisscart.R
+import com.mukshi.blisscart.data.model.Images
 import com.mukshi.blisscart.data.model.Product
+import com.mukshi.blisscart.data.model.Variation
 import com.mukshi.blisscart.ui.adapter.ProductAdapter
 import com.mukshi.blisscart.ui.viewmodel.CartViewModel
 import com.mukshi.blisscart.ui.viewmodel.CartViewModelFactory
@@ -31,12 +33,46 @@ class HomeFragment : Fragment() {
     private lateinit var cartViewModel: CartViewModel
 
     val dummyProducts = listOf(
-        Product(1, 1, "Basketball", "Blue", "https://mulei-blisscart.s3.eu-north-1.amazonaws.com/4204af0c-4c72-400c-987f-f91072baf7b5_basket.jpeg", 10, 100.0),
-        Product(4, 3, "Soccer Ball", "Description for product 4", "https://plus.unsplash.com/premium_photo-1675186049409-f9f8f60ebb5e?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 12, 250.0),
+        Product(
+            502,
+          1,
+            1,
+             "Supreme T-shirt",
+             "A high-quality t-shirt with supreme branding.",
+           listOf(
 
-                Product(2, 2, "Red Dress", "Ball", "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1760&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 5, 150.0),
-        Product(3, 1, "Blue scarf 3", "Description for product 3", "https://plus.unsplash.com/premium_photo-1675186049409-f9f8f60ebb5e?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 8, 200.0),
-    )
+              Images (1,                "https://mulei-blisscart.s3.eu-north-1.amazonaws.com/45494f5a-3f25-4882-be5d-b4b49ce9f950_Basketball.png" ,
+
+               ),
+               Images (145,                "https://mulei-blisscart.s3.eu-north-1.amazonaws.com/e9eec5b0-0d12-4f70-8cff-8cef77b48038_basket.jpeg" ,
+
+                   )  ,     Images (1945,                "https://mulei-blisscart.s3.eu-north-1.amazonaws.com/e9eec5b0-0d12-4f70-8cff-8cef77b48038_basket.jpeg" ,
+
+               ) ,      Images (1145,                "https://mulei-blisscart.s3.eu-north-1.amazonaws.com/e9eec5b0-0d12-4f70-8cff-8cef77b48038_basket.jpeg" ,
+
+            )   ,    Images (1345,                "https://mulei-blisscart.s3.eu-north-1.amazonaws.com/e9eec5b0-0d12-4f70-8cff-8cef77b48038_basket.jpeg" ,
+
+        )
+
+            ), // Replace with actual image URLs
+           listOf(
+                Variation(
+                    id = 552,
+                    productId = 502,
+                    variationDescription = "Black on Red",
+                    price = 90.0,
+                    quantity = 100
+                ),
+                Variation(
+                    id = 553,
+                    productId = 502,
+                    variationDescription = "White on Red",
+                    price = 190.0,
+                    quantity = 100
+                )
+
+            )
+           ))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

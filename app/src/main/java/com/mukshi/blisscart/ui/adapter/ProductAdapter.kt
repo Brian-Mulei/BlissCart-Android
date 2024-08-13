@@ -58,56 +58,56 @@ val  lowerCaseQuery = query.lowercase()
     inner class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val productName: TextView = itemView.findViewById(R.id.product_name)
-        private val productPrice: TextView = itemView.findViewById(R.id.product_price)
+      //  private val productPrice: TextView = itemView.findViewById(R.id.product_price)
         private val productImage: ImageView = itemView.findViewById(R.id.product_image)
-        private val quickAddButton: Button = itemView.findViewById(R.id.quick_add_button)
+     //   private val quickAddButton: Button = itemView.findViewById(R.id.quick_add_button)
 
        // private val addButton: Button = itemView.findViewById(R.id.add_button)
-        private val removeButton: Button = itemView.findViewById(R.id.remove_button)
-        private val quantityTextView: TextView = itemView.findViewById(R.id.quantity_text_view)
+   //     private val removeButton: Button = itemView.findViewById(R.id.remove_button)
+  //      private val quantityTextView: TextView = itemView.findViewById(R.id.quantity_text_view)
 
 
         fun bind(product: Product) {
 
             productName.text = product.product_name
-            productPrice.text = product.price.toString()
-//            productImage.setImageResource(product.image_url)
-            Picasso.get().load(product.image_url).into(productImage)
-
+         //   productPrice.text = product.price.toString()
+//   productImage.setImageResource(product.images?0)?.image_url)
+//            Picasso.get().load(product.image_url).into(productImage)
+//
             Glide.with(itemView.context)
-                .load(product.image_url)
+                .load(product.images?.get(0)?.image_url)
                 .placeholder(R.drawable.ic_launcher_background) // Placeholder image while loading
                 .error(R.drawable.ic_launcher_background) // Error image if loading fails
                 .into(productImage)
 
-             quickAddButton.setOnClickListener{
-
-                cartViewModel.addOrUpdateCartItem(product.id, product.product_name,1,product.price,product.image_url)
-             }
-
-            removeButton.setOnClickListener {
-                cartViewModel.removeCartItem(product.id)
-
-            }
+//             quickAddButton.setOnClickListener{
+//
+//             //  cartViewModel.addOrUpdateCartItem(product.id, product.product_name,1,product.price,product.image_url)
+//             }
+//
+//            removeButton.setOnClickListener {
+//          //      cartViewModel.removeCartItem(product.id)
+//
+//            }
 
             itemView.setOnClickListener {
                 onClick(product)
             }
-            removeButton.visibility = View.GONE
+//            removeButton.visibility = View.GONE
 
 
-            cartViewModel.cartItems.observeForever { cartItems ->
-                val cartItem = cartItems.find { it.productId == product.id }
-                if (cartItem != null) {
-                    quantityTextView.text = "Qty: ${cartItem.quantity}"
-                    removeButton.visibility = View.VISIBLE
-
-                } else {
-                    quantityTextView.text = "Qty: 0"
-                    removeButton.visibility = View.GONE
-
-                }
-            }
+//            cartViewModel.cartItems.observeForever { cartItems ->
+//                val cartItem = cartItems.find { it.productId == product.id }
+//                if (cartItem != null) {
+//                    quantityTextView.text = "Qty: ${cartItem.quantity}"
+//                    removeButton.visibility = View.VISIBLE
+//
+//                } else {
+//                    quantityTextView.text = "Qty: 0"
+//                    removeButton.visibility = View.GONE
+//
+//                }
+//            }
         }
 
     }
