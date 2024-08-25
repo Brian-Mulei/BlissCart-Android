@@ -63,6 +63,7 @@ class Login : AppCompatActivity() {
                 if (it.access_token.isNotEmpty()) {
                     // Navigate to home page
 
+                    sharedPrefsHelper.saveToken(it.access_token)
                     sharedPrefsHelper.setLoggedIn()
                     startActivity(Intent(this, HomeActivity::class.java))
                     finish()

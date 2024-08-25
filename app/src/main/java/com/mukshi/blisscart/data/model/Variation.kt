@@ -7,14 +7,14 @@ import android.os.Parcelable
 // Variation.kt
 data class Variation(
     val id: Int,
-    val productId: Int,
+   // val productId: Int?,
     val variationDescription: String,
     val price: Double,
     val quantity: Int
 )  : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
-        parcel.readInt(),
+    //    parcel.readInt(),
         parcel.readString().toString(),
         parcel.readDouble(),
         parcel.readInt()
@@ -22,7 +22,9 @@ data class Variation(
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
-        parcel.writeInt(productId)
+//        if (productId != null) {
+//            parcel.writeInt(productId)
+//        }
         parcel.writeString(variationDescription)
         parcel.writeDouble(price)
         parcel.writeInt(quantity)

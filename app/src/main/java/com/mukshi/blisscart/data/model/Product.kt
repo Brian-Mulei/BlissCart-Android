@@ -2,21 +2,21 @@ package com.mukshi.blisscart.data.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import androidx.room.util.TableInfo.*
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
 import kotlinx.parcelize.Parceler
 
 @Parcelize
- data class Product
-  (val id:Long,
-   val category_id:Long,
-   val vendor_id:Long,
-   val product_name: String,
-   val description: String,
-   val images:  @RawValue List<Images>? ,
+ data class Product(
+ val id:Long,
+ val categoryId:Long,
+ val vendorId:Long,
+ val name: String,
+ val description: String,
 
-    val variations: @RawValue List<Variation>?
+ val images:  @RawValue List<Images>?,
+
+ val variations: @RawValue List<Variation>?
 ) : Parcelable {
  constructor(parcel: Parcel) : this(
   parcel.readLong(),
@@ -24,6 +24,7 @@ import kotlinx.parcelize.Parceler
   parcel.readLong(),
      parcel.readString().toString(),
      parcel.readString().toString(),
+
   parcel.createTypedArrayList(Images.CREATOR),
   parcel.createTypedArrayList(Variation.CREATOR)
  )
@@ -34,10 +35,11 @@ import kotlinx.parcelize.Parceler
 
   override fun Product.write(parcel: Parcel, flags: Int) {
    parcel.writeLong(id)
-   parcel.writeLong(vendor_id)
-   parcel.writeLong(category_id)
-   parcel.writeString(product_name)
+   parcel.writeLong(vendorId)
+   parcel.writeLong(categoryId)
+   parcel.writeString(name)
    parcel.writeString(description)
+
    parcel.writeTypedList(images)
    parcel.writeTypedList(variations)
   }

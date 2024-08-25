@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mukshi.blisscart.remote.api.LoginRequest
-import com.mukshi.blisscart.remote.response.LoginResponse
+import com.mukshi.blisscart.data.model.LoginRequest
+ import com.mukshi.blisscart.remote.response.LoginResponse
 import com.mukshi.blisscart.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

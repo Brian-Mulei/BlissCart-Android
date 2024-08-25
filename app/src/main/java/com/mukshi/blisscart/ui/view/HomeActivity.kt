@@ -1,12 +1,12 @@
 package com.mukshi.blisscart.ui.view
 
 import android.os.Bundle
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mukshi.blisscart.R
 import com.mukshi.blisscart.utils.SharedPref
@@ -17,11 +17,19 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var sharedPrefsHelper: SharedPref
 
-
+    val homefragment: Fragment = HomeFragment()
+    val cartFragment: Fragment = CartFragment()
+    val fm: FragmentManager = supportFragmentManager
+    var active: Fragment = homefragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_home)
+
+        fm.beginTransaction().add(R.id.fragment_container, cartFragment, "2").hide(cartFragment).commit();
+        fm.beginTransaction().add(R.id.fragment_container,homefragment, "1").commit();
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -34,11 +42,17 @@ class HomeActivity : AppCompatActivity() {
             when(menuItem.itemId){
                 R.id.nav_home -> {
 
-                    loadFragment(HomeFragment())
+                    fm.beginTransaction().hide(active).show(homefragment).commit();
+                    active = homefragment;
+
+                  //  loadFragment(HomeFragment())
                     true
                 }
                 R.id.nav_saved -> {
-                    loadFragment(CartFragment())
+
+                    fm.beginTransaction().hide(active).show(cartFragment).commit();
+                    active = cartFragment;
+                    //     loadFragment(CartFragment())
                     true
                 }
 

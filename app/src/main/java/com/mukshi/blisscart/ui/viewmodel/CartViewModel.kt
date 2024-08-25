@@ -6,18 +6,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mukshi.blisscart.data.model.CartItem
 import com.mukshi.blisscart.data.room.CartDao
-import dagger.Binds
-import dagger.Provides
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CartViewModel @Inject constructor(private val cartDao: CartDao) : ViewModel() {
+class CartViewModel @Inject constructor(private val cartDao: CartDao ) : ViewModel() {
 
     private val _cartItems = MutableLiveData<List<CartItem>>()
     val cartItems: LiveData<List<CartItem>> get() = _cartItems
+
+    private val _selectedQuantity = MutableLiveData<Int>()
+    val selectedQuantity: LiveData<Int> get() = _selectedQuantity
 
     init {
         loadCartItems()
@@ -29,34 +30,60 @@ class CartViewModel @Inject constructor(private val cartDao: CartDao) : ViewMode
         }
     }
 
-    fun addOrUpdateCartItem(productId: Long, productName: String, quantity: Int, price: Double,productImage:String) {
+    fun addOrUpdateCartItem(productId: Int, productName: String, quantity: Int, price: Double ,action:String) {
         viewModelScope.launch(Dispatchers.IO) {
             val existingCartItem = cartDao.getCartItemByProductId(productId)
             if (existingCartItem != null) {
                 // Update the quantity of the existing item
-                val updatedItem =
-                    existingCartItem.copy(quantity = existingCartItem.quantity + quantity)
-                cartDao.updateCartItem(updatedItem)
-            } else {
+                if(action =="REPLACE") {
+                    val updatedItem =
+                        existingCartItem.copy(quantity =   quantity)
+                    cartDao.updateCartItem(updatedItem)
+                }else{
+                    val updatedItem =
+                        existingCartItem.copy(quantity = existingCartItem.quantity + quantity)
+                    cartDao.updateCartItem(updatedItem)
+                }
+            }
+            else {
                 // Insert a new item if it doesn't exist
                 val newCartItem = CartItem(
                     productId = productId,
                     productName = productName,
-                    productImage = productImage,
+                 //   productImage = productImage,
                     quantity = quantity,
                     price = price
                 )
                 cartDao.insertCartItem(newCartItem)
+
             }
             loadCartItems()
+
         }
     }
 
-    fun removeCartItem(productId: Long) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            cartDao.deleteCartItem(cartItem)
-//            loadCartItems()
-//        }
+
+
+    fun getCartItemByVariation(productId: Int ) {
+        viewModelScope.launch {
+            val cartItem = cartDao.getCartItemByProductId(productId)
+//            cartItem?.let {
+//                _selectedQuantity.value = it.quantity
+//            }
+
+            cartItem?.let {
+                _selectedQuantity.value = it.quantity
+            } ?: run {
+                _selectedQuantity.value = 0 // Default to 0 if the item is not found
+            }
+
+        }
+    }
+
+
+
+    fun removeCartItem(productId: Int) {
+
 
         viewModelScope.launch(Dispatchers.IO) {
             val existingCartItem = cartDao.getCartItemByProductId(productId)
@@ -70,8 +97,11 @@ class CartViewModel @Inject constructor(private val cartDao: CartDao) : ViewMode
                     cartDao.deleteCartItem(existingCartItem)
                 }
             }
+            loadCartItems()
+
         }
 
+        loadCartItems()
 
     }
 

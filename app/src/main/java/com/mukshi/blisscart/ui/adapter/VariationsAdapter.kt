@@ -1,5 +1,6 @@
 package com.mukshi.blisscart.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,8 @@ private val onVariationSelected: (Variation) -> Unit
 
     override fun onBindViewHolder(holder: VariationViewHolder, position: Int) {
         val variation = variations[position]
+
+
         holder.variationDescriptionTextView.text = variation.variationDescription
         holder.itemView.isSelected = selectedPosition == position
         holder.itemView.setOnClickListener {
@@ -37,5 +40,7 @@ private val onVariationSelected: (Variation) -> Unit
 
     class VariationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val variationDescriptionTextView: TextView = itemView.findViewById(R.id.variationDescriptionTextView)
+
+
     }
 }

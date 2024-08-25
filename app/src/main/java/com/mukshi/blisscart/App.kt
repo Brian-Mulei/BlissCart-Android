@@ -22,7 +22,8 @@ class App : Application(){
             applicationContext,
             Database::class.java,
             "app_database"
-        ).build()
+        )                .fallbackToDestructiveMigration() // Add this line
+            .build()
     }
 
     fun getDatabase(): Database {

@@ -1,5 +1,6 @@
 package com.mukshi.blisscart.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,7 @@ import com.mukshi.blisscart.ui.viewmodel.CartViewModel
 import com.squareup.picasso.Picasso
 
 class   ProductAdapter(
-    private val products: List<Product>,
+    private var products: List<Product>,
     private val onClick: (Product) -> Unit,
     private val cartViewModel: CartViewModel,
 ) :
@@ -41,6 +42,12 @@ class   ProductAdapter(
 
     override fun getItemCount(): Int =filteredProducts.size
 
+    fun updateList(newProducts: List<Product>) {
+        products = newProducts
+        filteredProducts = newProducts
+        notifyDataSetChanged()
+    }
+
       fun filter(query:String): List<Product> {
 
 val  lowerCaseQuery = query.lowercase()
@@ -49,7 +56,7 @@ val  lowerCaseQuery = query.lowercase()
               products
           }else{
               products.filter {
-                  it.product_name.lowercase().contains(lowerCaseQuery) ||
+                  it.name.lowercase().contains(lowerCaseQuery) ||
                           it.description.lowercase().contains(lowerCaseQuery)
               }
           }
@@ -58,37 +65,22 @@ val  lowerCaseQuery = query.lowercase()
     inner class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val productName: TextView = itemView.findViewById(R.id.product_name)
-      //  private val productPrice: TextView = itemView.findViewById(R.id.product_price)
-        private val productImage: ImageView = itemView.findViewById(R.id.product_image)
-     //   private val quickAddButton: Button = itemView.findViewById(R.id.quick_add_button)
-
-       // private val addButton: Button = itemView.findViewById(R.id.add_button)
-   //     private val removeButton: Button = itemView.findViewById(R.id.remove_button)
-  //      private val quantityTextView: TextView = itemView.findViewById(R.id.quantity_text_view)
+         private val productImage: ImageView = itemView.findViewById(R.id.product_image)
 
 
         fun bind(product: Product) {
+            Log.d("product_name", "Response: ${product}")
 
-            productName.text = product.product_name
-         //   productPrice.text = product.price.toString()
-//   productImage.setImageResource(product.images?0)?.image_url)
-//            Picasso.get().load(product.image_url).into(productImage)
-//
+            productName.text = product.name
+
             Glide.with(itemView.context)
-                .load(product.images?.get(0)?.image_url)
-                .placeholder(R.drawable.ic_launcher_background) // Placeholder image while loading
-                .error(R.drawable.ic_launcher_background) // Error image if loading fails
+                .load( product.images.takeIf { it?.isNotEmpty() == true }?.get(0)?.image_url
+                    ?: R.drawable.ic_placeholder )
+                .placeholder(R.drawable.ic_placeholder) // Placeholder image while loading
+                .error(R.drawable.ic_placeholder) // Error image if loading fails
                 .into(productImage)
 
-//             quickAddButton.setOnClickListener{
-//
-//             //  cartViewModel.addOrUpdateCartItem(product.id, product.product_name,1,product.price,product.image_url)
-//             }
-//
-//            removeButton.setOnClickListener {
-//          //      cartViewModel.removeCartItem(product.id)
-//
-//            }
+
 
             itemView.setOnClickListener {
                 onClick(product)

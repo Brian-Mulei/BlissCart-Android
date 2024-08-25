@@ -1,5 +1,6 @@
 package com.mukshi.blisscart.data.room
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.mukshi.blisscart.data.model.CartItem
 import dagger.Provides
@@ -24,5 +25,5 @@ import javax.inject.Singleton
     suspend fun updateCartItem(cartItem: CartItem)
 
     @Query("SELECT * FROM cart_items WHERE productId = :productId LIMIT 1")
-    suspend fun getCartItemByProductId(productId: Long): CartItem?
+   suspend   fun getCartItemByProductId(productId: kotlin.Int): CartItem?
 }

@@ -10,6 +10,7 @@ class SharedPref (context: Context) {
     companion object {
         private const val PREFS_NAME = "your_app_prefs"
         private const val KEY_USERNAME = "username"
+        private const val KEY_TOKEN = "token"
         private const val KEY_LOGGED_IN = "logged_in"
     }
 
@@ -17,6 +18,16 @@ class SharedPref (context: Context) {
         val editor = prefs.edit()
         editor.putString(KEY_USERNAME, username)
         editor.apply()
+    }
+
+
+    fun saveToken(token: String) {
+        val editor = prefs.edit()
+        editor.putString(KEY_TOKEN, token)
+        editor.apply()
+    }
+    fun getToken(): String? {
+        return prefs.getString(KEY_TOKEN, null)
     }
 
     fun getUsername(): String? {
