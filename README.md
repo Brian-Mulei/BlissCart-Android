@@ -24,7 +24,6 @@ The Android app for BlissCart is developed using Kotlin and follows modern Andro
 - **Order Management:** Users can place orders, check their status, and view past orders.
 - **Authentication:** Secure login and registration processes, integrated with JWT for backend communication.
 
-For more details on the Android app implementation, 
-
+- 
 For the backend side of blisscart please visit  the [BlissCart Spring boot repository](https://github.com/Brian-Mulei/blisscart).
 
