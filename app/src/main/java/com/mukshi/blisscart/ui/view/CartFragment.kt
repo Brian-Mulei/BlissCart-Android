@@ -40,6 +40,7 @@ class CartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        cartViewModel.loadCartItems()
 
         // Initialize views
         totalPriceTextView = view.findViewById(R.id.total_price)
@@ -53,12 +54,12 @@ class CartFragment : Fragment() {
         cartAdapter = CartItemAdapter(emptyList(),
             { cartItem ->
                 // Handle incrementing quantity
-                cartViewModel.addOrUpdateCartItem(cartItem.productId, cartItem.productName,  1, cartItem.price,"ADD")
+                cartViewModel.addOrUpdateCartItem(cartItem.productId, cartItem.variationId,cartItem.productName, cartItem.variationName,cartItem.vendorName, cartItem.image_url, 1, cartItem.price,"ADD")
             },
             { cartItem ->
                 // Handle decrementing quantity
                 if (cartItem.quantity > 1) {
-                    cartViewModel.addOrUpdateCartItem(cartItem.productId, cartItem.productName,   - 1, cartItem.price,"ADD")
+                    cartViewModel.addOrUpdateCartItem(cartItem.productId, cartItem.variationId,cartItem.productName, cartItem.variationName,cartItem.vendorName, cartItem.image_url, -1, cartItem.price,"ADD")
                 } else {
                     // Show a confirmation dialog before removing the item
                     confirmRemoveItem(cartItem)

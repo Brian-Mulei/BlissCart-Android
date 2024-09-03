@@ -40,8 +40,10 @@ object AppModule {
           //  .addInterceptor(loggingInterceptor)
             .build()
 
+        //51.20.105.244
+//192.168.100.34
         return Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8080/") // Replace with your API base URL
+            .baseUrl("http://192.168.100.34:8080/") // Replace with your API base URL
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

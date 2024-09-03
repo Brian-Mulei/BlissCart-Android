@@ -8,8 +8,14 @@ data class CartItem(
 
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val productId: Int,
+    val variationId: Int,
     val productName: String,
-     var quantity: Int,
+
+    val vendorName: String,
+    val variationName: String,
+    val image_url: String,
+
+    var quantity: Int,
     val price: Double
 ) {
 

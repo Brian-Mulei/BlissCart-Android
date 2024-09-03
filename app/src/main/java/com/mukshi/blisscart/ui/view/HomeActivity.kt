@@ -2,13 +2,17 @@ package com.mukshi.blisscart.ui.view
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.mukshi.blisscart.App
 import com.mukshi.blisscart.R
+import com.mukshi.blisscart.ui.viewmodel.CartViewModel
+import com.mukshi.blisscart.ui.viewmodel.CartViewModelFactory
 import com.mukshi.blisscart.utils.SharedPref
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,6 +25,11 @@ class HomeActivity : AppCompatActivity() {
     val cartFragment: Fragment = CartFragment()
     val fm: FragmentManager = supportFragmentManager
     var active: Fragment = homefragment
+
+    private val cartViewModel: CartViewModel by viewModels {
+        CartViewModelFactory(App.instance.getDatabase().cartDao())
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -52,6 +61,7 @@ class HomeActivity : AppCompatActivity() {
 
                     fm.beginTransaction().hide(active).show(cartFragment).commit();
                     active = cartFragment;
+
                     //     loadFragment(CartFragment())
                     true
                 }

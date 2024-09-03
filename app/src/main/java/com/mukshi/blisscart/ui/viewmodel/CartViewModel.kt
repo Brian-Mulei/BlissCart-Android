@@ -24,43 +24,53 @@ class CartViewModel @Inject constructor(private val cartDao: CartDao ) : ViewMod
         loadCartItems()
     }
 
-    private fun loadCartItems() {
+      fun loadCartItems() {
         viewModelScope.launch(Dispatchers.IO) {
             _cartItems.postValue(cartDao.getAllCartItems())
         }
     }
 
-    fun addOrUpdateCartItem(productId: Int, productName: String, quantity: Int, price: Double ,action:String) {
+    fun addOrUpdateCartItem(productId: Int, variationId: Int, productName: String,variationName:String,vendorName:String ,image_url:String,  quantity: Int, price: Double ,action:String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val existingCartItem = cartDao.getCartItemByProductId(productId)
+            val existingCartItem = cartDao.getCartItemByProductId(variationId)
             if (existingCartItem != null) {
                 // Update the quantity of the existing item
                 if(action =="REPLACE") {
                     val updatedItem =
                         existingCartItem.copy(quantity =   quantity)
                     cartDao.updateCartItem(updatedItem)
+                    loadCartItems()
                 }else{
                     val updatedItem =
                         existingCartItem.copy(quantity = existingCartItem.quantity + quantity)
                     cartDao.updateCartItem(updatedItem)
+                    loadCartItems()
+
                 }
             }
             else {
                 // Insert a new item if it doesn't exist
                 val newCartItem = CartItem(
                     productId = productId,
+                    variationId = variationId,
+                    variationName = variationName,
+                    vendorName=vendorName,
                     productName = productName,
-                 //   productImage = productImage,
+                    image_url = image_url,
                     quantity = quantity,
                     price = price
                 )
                 cartDao.insertCartItem(newCartItem)
+                loadCartItems()
+
 
             }
             loadCartItems()
-
         }
+        loadCartItems()
     }
+
+
 
 
 
@@ -88,14 +98,16 @@ class CartViewModel @Inject constructor(private val cartDao: CartDao ) : ViewMod
         viewModelScope.launch(Dispatchers.IO) {
             val existingCartItem = cartDao.getCartItemByProductId(productId)
             if (existingCartItem != null) {
-                if (existingCartItem.quantity > 1) {
-                    // Decrease quantity
-                    val updatedCartItem = existingCartItem.copy(quantity = existingCartItem.quantity - 1)
-                    cartDao.updateCartItem(updatedCartItem)
-                } else {
+//                if (existingCartItem.quantity > 1) {
+//                    // Decrease quantity
+//                    val updatedCartItem = existingCartItem.copy(quantity = existingCartItem.quantity - 1)
+//                    cartDao.updateCartItem(updatedCartItem)
+//                } else
+
+
                     // Remove item if quantity is 1
                     cartDao.deleteCartItem(existingCartItem)
-                }
+
             }
             loadCartItems()
 

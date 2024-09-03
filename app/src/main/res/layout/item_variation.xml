@@ -10,5 +10,6 @@
     <TextView
         android:id="@+id/variationDescriptionTextView"
         android:layout_width="wrap_content"
+        android:textColor="@color/system_black"
         android:layout_height="wrap_content" />
 </LinearLayout>

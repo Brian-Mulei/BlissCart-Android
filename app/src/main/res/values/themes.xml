@@ -1,8 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.BlissCart" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.BlissCart" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="backgroundColor">@color/system_grey</item>
+<!--        <item name="android:textColor">@color/system_black</item>-->
+<!--        <item name="android:textColorHighlight">@color/colorPrimary</item>-->
+        <item name="fontFamily">@font/poppins_light</item>
     </style>
 
     <style name="Theme.BlissCart" parent="Base.Theme.BlissCart" />

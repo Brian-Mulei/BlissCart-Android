@@ -21,6 +21,7 @@ class CartItemAdapter(
 
     class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val productName: TextView = itemView.findViewById(R.id.product_name)
+        val vendorName: TextView = itemView.findViewById(R.id.vendor_name)
         val productPrice: TextView = itemView.findViewById(R.id.total_price)
         val productImage: ImageView = itemView.findViewById(R.id.product_image)
         val productQuantity: TextView = itemView.findViewById(R.id.product_quantity)
@@ -38,16 +39,17 @@ class CartItemAdapter(
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val cartItem = cartItems[position]
 
-        holder.productName.text = cartItem.productName
+        holder.productName.text = "${cartItem.productName} - ${cartItem.variationName} "
+        holder.vendorName.text = cartItem.vendorName
         holder.productPrice.text = "KES ${cartItem.quantity * cartItem.price}"
         holder.productQuantity.text = cartItem.quantity.toString()
 
         // Load product image using Glide
-//        Glide.with(holder.itemView.context)
-//            .load(cartItem.productImage)
-//            .placeholder(R.drawable.ic_placeholder) // Placeholder image while loading
-//            .error(R.drawable.ic_placeholder) // Error image if loading fails
-//            .into(holder.productImage)
+        Glide.with(holder.itemView.context)
+            .load(cartItem.image_url)
+            .placeholder(R.drawable.ic_placeholder) // Placeholder image while loading
+            .error(R.drawable.ic_placeholder) // Error image if loading fails
+            .into(holder.productImage)
 
         // Handle the add button click
         holder.btnAdd.setOnClickListener {

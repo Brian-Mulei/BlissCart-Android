@@ -37,6 +37,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import android.content.Context
+import android.graphics.Color
 import com.mukshi.blisscart.ui.adapter.CartItemAdapter
 
 @AndroidEntryPoint
@@ -97,6 +98,8 @@ class ProductDetails : AppCompatActivity() {
         addToCartButton = findViewById(R.id.addToCartButton)
 
 
+
+
         product?.let {
 
 
@@ -127,17 +130,22 @@ class ProductDetails : AppCompatActivity() {
 
             cartViewModel.selectedQuantity.observe(this) { quantity ->
 
+
                 currentQuantity =quantity
                 quantityTextView.text = currentQuantity.toString()
 
-             }
+
+              }
 
             decreaseQuantityButton.setOnClickListener {
                 if (currentQuantity > 1) {
                     currentQuantity--
                     quantityTextView.text = currentQuantity.toString()
+                    addToCartButton.isEnabled = currentQuantity > 0
+
                 }
             }
+
             increaseQuantityButton.setOnClickListener {
                 currentQuantity++
                 quantityTextView.text = currentQuantity.toString()
@@ -145,7 +153,7 @@ class ProductDetails : AppCompatActivity() {
 
 
             addToCartButton.setOnClickListener {
-                if (selectedVariation == null) {
+                if (selectedVariation == null || currentQuantity < 1) {
 
                     Toast.makeText(applicationContext, "Select a variant", Toast.LENGTH_SHORT).show()
 
@@ -153,11 +161,15 @@ class ProductDetails : AppCompatActivity() {
                 {
                 selectedVariation?.let { variation ->
                     cartViewModel.addOrUpdateCartItem(
-                        variation.id,
-                        variation.variationDescription,
-                        currentQuantity,
-                        variation.price,
-                        "REPLACE"
+                    productId = product.id.toInt(),
+                    variationId = variation.id,
+                    productName = product.name,
+                    variationName = variation.variationDescription,
+                    vendorName = product.vendorName,
+                    image_url = product.images.takeIf { it?.isNotEmpty() == true }?.get(0)?.image_url ?: "",
+                    quantity = currentQuantity,
+                    price = variation.price,
+                    action = "REPLACE"
                     )
                       Toast.makeText(applicationContext, "Cart updated", Toast.LENGTH_SHORT).show()
                 }
@@ -165,10 +177,9 @@ class ProductDetails : AppCompatActivity() {
 
             }
 
+                cartViewModel.loadCartItems()
+
             }
-
-
-
 
         }
 
@@ -200,7 +211,7 @@ class ProductDetails : AppCompatActivity() {
             cartViewModel.getCartItemByVariation(selectedVariation.id)
 
             this.selectedVariation = selectedVariation
-            priceTextView.text = selectedVariation.price.toString()
+            priceTextView.text = "KES  ${selectedVariation.price}"
         }
         variationsRecyclerView.adapter = variationsAdapter
     }

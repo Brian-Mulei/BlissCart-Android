@@ -24,6 +24,6 @@ import javax.inject.Singleton
     @Update
     suspend fun updateCartItem(cartItem: CartItem)
 
-    @Query("SELECT * FROM cart_items WHERE productId = :productId LIMIT 1")
-   suspend   fun getCartItemByProductId(productId: kotlin.Int): CartItem?
+    @Query("SELECT * FROM cart_items WHERE variationId = :variationId LIMIT 1")
+   suspend   fun getCartItemByProductId(variationId: kotlin.Int): CartItem?
 }

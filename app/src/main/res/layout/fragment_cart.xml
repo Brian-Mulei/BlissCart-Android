@@ -14,19 +14,28 @@
         android:clipToPadding="false"
         android:paddingBottom="16dp"/>
 
+
     <TextView
         android:id="@+id/total_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:textColor="@android:color/black"
-        android:text="Total: $0.00"
+        android:text="Total: KES 0.00"
+        android:layout_gravity="center"
         android:paddingBottom="16dp"/>
 
     <Button
         android:id="@+id/go_to_checkout_button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+         android:layout_gravity="center"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/system_black"
         android:layout_height="wrap_content"
-        android:text="Go to Checkout"
+        android:padding="12dp"
+        android:layout_margin="18dp"
+         android:text="Go to Checkout"
         android:textSize="16sp"/>
 </LinearLayout>

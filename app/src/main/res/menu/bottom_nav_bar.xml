@@ -3,14 +3,19 @@
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_home"
+        android:iconTint="@color/black"
         android:title="@string/menu_name_home" />
     <item
         android:id="@+id/nav_saved"
         android:icon="@drawable/ic_cart"
+        android:iconTint="@color/black"
+
         android:title="@string/menu_name_saved" />
     <item
         android:id="@+id/nav_inbox"
         android:icon="@drawable/baseline_chat_bubble_24"
+        android:iconTint="@color/black"
+
         android:title="@string/menu_name_inbox" />
     <item
         android:id="@+id/nav_account_settings"

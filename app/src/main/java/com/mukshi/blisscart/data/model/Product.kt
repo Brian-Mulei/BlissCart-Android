@@ -12,6 +12,7 @@ import kotlinx.parcelize.Parceler
  val categoryId:Long,
  val vendorId:Long,
  val name: String,
+ val vendorName: String,
  val description: String,
 
  val images:  @RawValue List<Images>?,
@@ -23,7 +24,8 @@ import kotlinx.parcelize.Parceler
   parcel.readLong(),
   parcel.readLong(),
      parcel.readString().toString(),
-     parcel.readString().toString(),
+  parcel.readString().toString(),
+  parcel.readString().toString(),
 
   parcel.createTypedArrayList(Images.CREATOR),
   parcel.createTypedArrayList(Variation.CREATOR)
@@ -38,6 +40,7 @@ import kotlinx.parcelize.Parceler
    parcel.writeLong(vendorId)
    parcel.writeLong(categoryId)
    parcel.writeString(name)
+   parcel.writeString(vendorName)
    parcel.writeString(description)
 
    parcel.writeTypedList(images)

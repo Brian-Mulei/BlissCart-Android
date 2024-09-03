@@ -2,17 +2,24 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="grey">#F1E6E6</color>
+
+
+    <color name="system_grey">#F1F1F1</color>
+    <color name="system_black">#2A2A2A</color>
 
     <!-- Primary Color -->
-    <color name="colorPrimary">#5A2D81</color>
-    <color name="colorPrimaryDark">#4A1A62</color>
-    <color name="colorAccent">#F8C300</color>
+    <color name="colorPrimary">#48D861</color>
 
-    <!-- Background Color -->
-    <color name="colorBackground">#FDF8FF</color>
 
-    <!-- Accent Color -->
-    <color name="colorAccentSecondary">#FF6F61</color>
+<!--    <color name="colorPrimaryDark">#4A1A62</color>-->
+<!--    <color name="colorAccent">#F8C300</color>-->
+
+<!--    &lt;!&ndash; Background Color &ndash;&gt;-->
+<!--    <color name="colorBackground">#E9C4F8</color>-->
+
+<!--    &lt;!&ndash; Accent Color &ndash;&gt;-->
+<!--    <color name="colorAccentSecondary">#FF6F61</color>-->
 
     <!-- Text Colors -->
     <color name="textColorPrimary">#333333</color>
