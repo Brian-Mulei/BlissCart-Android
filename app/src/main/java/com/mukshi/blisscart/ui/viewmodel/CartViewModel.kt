@@ -32,7 +32,7 @@ class CartViewModel @Inject constructor(private val cartDao: CartDao ) : ViewMod
 
     fun addOrUpdateCartItem(productId: Int, variationId: Int, productName: String,variationName:String,vendorName:String ,image_url:String,  quantity: Int, price: Double ,action:String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val existingCartItem = cartDao.getCartItemByProductId(variationId)
+            val existingCartItem = cartDao.getCartItemByProductVariationId(variationId)
             if (existingCartItem != null) {
                 // Update the quantity of the existing item
                 if(action =="REPLACE") {
@@ -62,13 +62,9 @@ class CartViewModel @Inject constructor(private val cartDao: CartDao ) : ViewMod
                 )
                 cartDao.insertCartItem(newCartItem)
                 loadCartItems()
-
-
             }
-            loadCartItems()
-        }
-        loadCartItems()
-    }
+         }
+     }
 
 
 
@@ -76,7 +72,7 @@ class CartViewModel @Inject constructor(private val cartDao: CartDao ) : ViewMod
 
     fun getCartItemByVariation(productId: Int ) {
         viewModelScope.launch {
-            val cartItem = cartDao.getCartItemByProductId(productId)
+            val cartItem = cartDao.getCartItemByProductVariationId(productId)
 //            cartItem?.let {
 //                _selectedQuantity.value = it.quantity
 //            }
@@ -92,28 +88,18 @@ class CartViewModel @Inject constructor(private val cartDao: CartDao ) : ViewMod
 
 
 
-    fun removeCartItem(productId: Int) {
-
-
+    fun removeCartItem(variationId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            val existingCartItem = cartDao.getCartItemByProductId(productId)
+            val existingCartItem = cartDao.getCartItemByProductVariationId(variationId)
             if (existingCartItem != null) {
-//                if (existingCartItem.quantity > 1) {
-//                    // Decrease quantity
-//                    val updatedCartItem = existingCartItem.copy(quantity = existingCartItem.quantity - 1)
-//                    cartDao.updateCartItem(updatedCartItem)
-//                } else
 
-
-                    // Remove item if quantity is 1
-                    cartDao.deleteCartItem(existingCartItem)
+                cartDao.deleteCartItem(existingCartItem)
+                loadCartItems()
 
             }
             loadCartItems()
 
         }
-
-        loadCartItems()
 
     }
 

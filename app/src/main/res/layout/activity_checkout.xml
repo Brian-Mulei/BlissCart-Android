@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.view.Checkout"
+    android:background="@color/system_grey"
+
+    android:orientation="vertical"
+
+    android:padding="16dp">
+
+    <!-- Back Button -->
+    <ImageButton
+        android:layout_marginTop="20dp"
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back"
+        android:contentDescription="Back Button"
+        android:background="?attr/selectableItemBackgroundBorderless"
+
+        android:layout_gravity="start" />
+
+    <!-- Cart Items RecyclerView -->
+    <TextView
+        android:layout_marginStart="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Checkout"
+        android:textColor="@color/system_black"
+
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCartItems"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+
+        android:layout_weight="1"/>
+
+
+
+
+        <TextView
+            android:id="@+id/total_price"
+            android:text=" 0 "
+                android:textSize="22dp"
+            android:textColor="@color/system_black"
+
+            android:layout_gravity="center"
+            android:paddingBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+     <!-- Payment Method Spinner -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_marginStart="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Payment Method"
+            android:textColor="@color/system_black"
+
+            android:textSize="16sp"
+            android:textStyle="normal"
+            android:layout_marginTop="6dp"/>
+        <Spinner
+            android:id="@+id/spinnerPaymentMethod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+             android:textColor="@color/system_black"
+            android:backgroundTint="@color/system_black"
+            android:entries="@array/payment_methods"
+            android:layout_marginTop="12dp"/>
+
+    </LinearLayout>
+
+
+    <!-- Mobile Money Phone Number Input -->
+    <EditText
+        android:id="@+id/etPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Phone Number"
+        android:visibility="gone"
+        android:textColor="@color/system_black"
+        android:textColorHint="@color/system_black"
+        android:backgroundTint="@color/system_black"
+
+        android:inputType="phone"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Bank Card Details Input -->
+    <EditText
+        android:id="@+id/etCardNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Card Number"
+
+        android:textColor="@color/system_black"
+        android:backgroundTint="@color/system_black"
+
+        android:textColorHint="@color/system_black"
+        android:visibility="gone"
+        android:inputType="number"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Checkout Button -->
+    <Button
+        android:id="@+id/btnCheckout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Checkout"
+        android:layout_marginTop="16dp"/>
+
+    </LinearLayout>
+

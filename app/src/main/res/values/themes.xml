@@ -10,4 +10,10 @@
     </style>
 
     <style name="Theme.BlissCart" parent="Base.Theme.BlissCart" />
+
+         <string-array name="payment_methods">
+            <item>Mobile Money</item>
+            <item>Card Payment</item>
+        </string-array>
+
 </resources>

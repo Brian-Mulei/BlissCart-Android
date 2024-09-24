@@ -24,8 +24,6 @@ object AppModule {
     @Singleton
     fun provideRetrofit(): Retrofit {
 
-
-
         val sharedPreferences = App.instance.getSharedPreferences("your_app_prefs", Context.MODE_PRIVATE )
         val accessToken = sharedPreferences.getString("token", "")
 
@@ -37,13 +35,12 @@ object AppModule {
                 val request = requestBuilder.build()
                 chain.proceed(request)
             }
-          //  .addInterceptor(loggingInterceptor)
+        //   .addInterceptor(loggingInterceptor)
             .build()
 
-        //51.20.105.244
-//192.168.100.34
+        //10.0.2.2
         return Retrofit.Builder()
-            .baseUrl("http://192.168.100.34:8080/") // Replace with your API base URL
+            .baseUrl("http://10.0.2.2:8080/") // Replace with your API base URL
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

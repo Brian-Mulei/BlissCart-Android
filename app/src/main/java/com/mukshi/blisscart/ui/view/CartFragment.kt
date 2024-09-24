@@ -1,5 +1,6 @@
 package com.mukshi.blisscart.ui.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -84,9 +85,17 @@ class CartFragment : Fragment() {
         // Set checkout button click listener
         goToCheckoutButton.setOnClickListener {
             // Handle checkout logic, e.g., navigate to checkout screen
+
+            val intent = Intent(requireContext(), Checkout::class.java)
+            startActivity(intent)
         }
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        cartViewModel.loadCartItems()
+    }
     private fun updateTotalPrice(cartItems: List<CartItem>) {
         val totalPrice = cartItems.sumOf { it.price * it.quantity }
         totalPriceTextView.text = "Total: KES ${"%.2f".format(totalPrice)}"
@@ -99,7 +108,7 @@ class CartFragment : Fragment() {
             .setTitle("Remove Item")
             .setMessage("Are you sure you want to remove this item from the cart?")
             .setPositiveButton("Yes") { _, _ ->
-                cartViewModel.removeCartItem(cartItem.productId)
+                cartViewModel.removeCartItem(cartItem.variationId)
             }
             .setNegativeButton("No", null)
             .create()
