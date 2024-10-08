@@ -60,6 +60,7 @@ class Login : AppCompatActivity() {
              //   tvMessage.visibility = TextView.VISIBLE
                 Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
                 sharedPrefsHelper.saveUsername(etUsername.text.toString().trim())
+                sharedPrefsHelper.saveUserId(it.user_id)
                 if (it.access_token.isNotEmpty()) {
                     // Navigate to home page
 
